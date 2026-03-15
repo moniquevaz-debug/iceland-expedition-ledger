@@ -30,6 +30,41 @@
 
     body { font-family: 'Crimson Pro', Georgia, serif; background: var(--ink); color: var(--text-primary); min-height: 100vh; overflow-x: hidden; }
 
+    /* ── Mobile responsive ── */
+    @media(max-width:600px) {
+      .masthead { padding: 2rem 1.25rem 1.5rem; }
+      .masthead::after { font-size: 5rem; }
+      .title-block { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .countdown-block { text-align: left; display: flex; gap: 1.5rem; align-items: flex-end; }
+      .countdown-num { font-size: 2rem; }
+      .nav { padding: 0 0.5rem; }
+      .nav-btn { padding: 0.85rem 0.75rem; font-size: 9px; letter-spacing: 0.1em; }
+      .nav-export { padding: 0.5rem 0.75rem; font-size: 9px; margin-left: 0.25rem; }
+      .section { padding: 1.25rem 1rem 2rem; }
+      .road-section { padding: 1.25rem 1rem 1rem; }
+      .filmstrip-wrap { padding: 1.25rem 1rem; }
+      .person-header { padding: 1rem; }
+      .person-body { padding: 1rem; }
+      .add-entry-form { padding: 0.85rem; }
+      .add-entry-row { flex-direction: column; gap: 0.6rem; }
+      .amt-wrap { width: 100%; }
+      .amt-input { width: 100%; flex: 1; }
+      .date-input { width: 100%; }
+      .note-input { width: 100%; min-width: unset; }
+      .field-group { width: 100%; }
+      .add-btn { width: 100%; text-align: center; padding: 0.65rem; }
+      .totals-bar { padding: 1.25rem 1rem; }
+      .pct-display { font-size: 3rem; }
+      .section-title { font-size: 1.4rem; }
+      .tour-cell { padding: 1rem 0.5rem; }
+      .quick-btn { font-size: 9px; padding: 0.25rem 0.5rem; }
+      .entry-log td, .entry-log th { font-size: 10px; padding: 0.4rem 0.2rem; }
+      .dossier { padding: 1.25rem 1rem; }
+      .road-name { width: 46px; font-size: 9px; }
+      .person-right { gap: 0.75rem; }
+      .balance-owed { font-size: 0.95rem; }
+    }
+
     /* ── Aurora masthead ── */
     .aurora-bands { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
     .aurora-bands::before {
@@ -184,7 +219,7 @@
     .add-entry-title { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--aurora-teal); margin-bottom:0.85rem; }
     .add-entry-row { display:flex; gap:0.75rem; flex-wrap:wrap; align-items:flex-end; }
 
-    .field-group { display:flex; flex-direction:column; gap:0.3rem; }
+    .field-group { display:flex; flex-direction:column; gap:0.3rem; min-width:0; }
     .field-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
 
     .amt-wrap { display:flex; align-items:stretch; background:var(--paper2); border:1px solid var(--line-strong); border-radius:3px; overflow:hidden; transition:border-color 0.2s; }
