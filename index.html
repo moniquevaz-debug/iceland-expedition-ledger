@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Iceland Expedition 2026</title>
+  <title>Iceland Expedition 2026 · v2</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=DM+Mono:wght@400;500&family=Crimson+Pro:ital,wght@0,400;1,300;1,400&display=swap');
 
@@ -16,34 +16,25 @@
       --aurora-teal: #1de8c8;
       --aurora-violet: #a259f7;
       --aurora-pink: #f25fcb;
-      --aurora-blue: #38bdf8;
-      --accent: #3dffa0;
-      --accent-dim: #1a8a56;
-      --accent-soft: rgba(61,255,160,0.12);
+      --accent-soft: rgba(61,255,160,0.10);
       --muted: #4a7a6a;
       --faint: #2a5048;
       --line: rgba(61,255,160,0.08);
       --line-strong: rgba(61,255,160,0.18);
       --text-primary: #d4f5e8;
       --text-secondary: #7bcfaa;
+      --danger: #f25fcb;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
-      font-family: 'Crimson Pro', Georgia, serif;
-      background: var(--ink);
-      color: var(--text-primary);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+    body { font-family: 'Crimson Pro', Georgia, serif; background: var(--ink); color: var(--text-primary); min-height: 100vh; overflow-x: hidden; }
 
+    /* ── Aurora masthead ── */
     .aurora-bands { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
     .aurora-bands::before {
       content: '';
-      position: absolute;
-      top: -40%; left: -20%;
-      width: 140%; height: 200%;
+      position: absolute; top: -40%; left: -20%; width: 140%; height: 200%;
       background:
         radial-gradient(ellipse 70% 30% at 30% 40%, rgba(61,255,160,0.07) 0%, transparent 60%),
         radial-gradient(ellipse 50% 25% at 70% 55%, rgba(162,89,247,0.07) 0%, transparent 60%),
@@ -52,34 +43,16 @@
     }
     @keyframes drift { 0%{transform:translate(0,0) scale(1)} 100%{transform:translate(3%,4%) scale(1.04)} }
 
-    .masthead {
-      background: var(--ink);
-      color: var(--text-primary);
-      padding: 3rem 2.5rem 2rem;
-      position: relative;
-      overflow: hidden;
-      border-bottom: 1px solid var(--line-strong);
-    }
-    .masthead::after {
-      content: 'ICELAND';
-      position: absolute; bottom: -0.15em; left: -0.02em;
-      font-family: 'Playfair Display', serif;
-      font-size: 14rem; font-weight: 900;
-      color: rgba(61,255,160,0.025);
-      line-height: 1; pointer-events: none; white-space: nowrap;
-    }
+    .masthead { background: var(--ink); padding: 3rem 2.5rem 2rem; position: relative; overflow: hidden; border-bottom: 1px solid var(--line-strong); }
+    .masthead::after { content:'ICELAND'; position:absolute; bottom:-0.15em; left:-0.02em; font-family:'Playfair Display',serif; font-size:14rem; font-weight:900; color:rgba(61,255,160,0.025); line-height:1; pointer-events:none; white-space:nowrap; }
 
-    .eyebrow {
-      font-family: 'DM Mono', monospace; font-size: 10px;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--aurora-teal); margin-bottom: 1rem;
-      display: flex; align-items: center; gap: 1rem; position: relative; z-index: 1;
-    }
+    .eyebrow { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--aurora-teal); margin-bottom:1rem; display:flex; align-items:center; gap:1rem; position:relative; z-index:1; }
     .eyebrow::before { content:''; display:block; width:2rem; height:1px; background:var(--aurora-teal); }
 
     .title-block { display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1.5rem; position:relative; z-index:1; }
-    h1 { font-family:'Playfair Display',serif; font-size:clamp(3rem,8vw,5.5rem); font-weight:900; line-height:0.9; color:var(--text-primary); }
+    h1 { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,7vw,5rem); font-weight:900; line-height:0.9; color:var(--text-primary); }
     h1 em { font-style:italic; font-weight:700; color:var(--aurora-green); display:block; font-size:0.55em; line-height:1.4; }
+    .v-badge { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.15em; color:var(--aurora-violet); border:1px solid var(--aurora-violet); padding:2px 7px; border-radius:100px; vertical-align:middle; margin-left:0.5rem; opacity:0.8; }
 
     .countdown-block { text-align:right; position:relative; z-index:1; }
     .countdown-num { font-family:'Playfair Display',serif; font-size:3rem; font-weight:700; color:var(--text-primary); line-height:1; }
@@ -88,18 +61,21 @@
     .sync-line { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-top:1.5rem; display:flex; align-items:center; gap:0.5rem; position:relative; z-index:1; }
     .sync-dot { width:5px; height:5px; border-radius:50%; background:var(--aurora-green); }
 
+    /* ── Nav ── */
     .page { background:var(--paper); min-height:100vh; }
-
-    .nav { display:flex; align-items:center; padding:0 2.5rem; border-bottom:1px solid var(--line-strong); background:var(--paper2); overflow-x:auto; }
+    .nav { display:flex; align-items:center; padding:0 2.5rem; border-bottom:1px solid var(--line-strong); background:var(--paper2); overflow-x:auto; gap:0; }
     .nav-btn { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); padding:1rem 1.5rem; border:none; background:none; cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px; transition:all 0.2s; white-space:nowrap; }
     .nav-btn.active { color:var(--aurora-green); border-bottom-color:var(--aurora-green); }
     .nav-btn:hover:not(.active) { color:var(--text-secondary); }
     .nav-right { margin-left:auto; }
+    .nav-export { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--aurora-teal); padding:0.6rem 1.2rem; border:1px solid var(--aurora-teal); border-radius:100px; background:none; cursor:pointer; transition:all 0.2s; white-space:nowrap; margin-left:1rem; }
+    .nav-export:hover { background:rgba(29,232,200,0.1); color:var(--aurora-green); border-color:var(--aurora-green); }
 
-    .section { display:none; padding:2.5rem; }
+    /* ── Sections ── */
+    .section { display:none; padding:2rem 2.5rem 3rem; }
     .section.active { display:block; }
 
-    .dossier { background:var(--paper2); border:1px solid var(--line-strong); border-radius:2px; padding:1.5rem 2rem; margin-bottom:2rem; display:none; }
+    .dossier { background:var(--paper2); border:1px solid var(--line-strong); padding:1.5rem 2rem; margin-bottom:2rem; display:none; }
     .dossier.open { display:block; }
     .dossier-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--aurora-teal); margin-bottom:1rem; }
     .dossier-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
@@ -107,12 +83,13 @@
     .dossier-item strong { display:block; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:var(--aurora-green); margin-bottom:0.4rem; }
     .dossier-item p { font-size:13px; color:var(--text-secondary); line-height:1.5; }
 
+    /* ── Road progress ── */
     .progress-header { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:2rem; flex-wrap:wrap; gap:0.5rem; }
     .section-title { font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:700; font-style:italic; color:var(--text-primary); }
     .section-sub { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-top:0.3rem; }
     .pct-display { font-family:'Playfair Display',serif; font-size:4rem; font-weight:900; color:var(--aurora-green); line-height:1; }
 
-    .road-section { background:var(--paper2); border:1px solid var(--line-strong); border-radius:2px; padding:2rem 2rem 1.5rem; margin-bottom:2rem; }
+    .road-section { background:var(--paper2); border:1px solid var(--line-strong); padding:2rem 2rem 1.5rem; margin-bottom:2rem; }
     .road-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--aurora-teal); margin-bottom:1.5rem; }
     .road-rows { display:flex; flex-direction:column; gap:1.6rem; }
     .road-row { display:flex; align-items:center; gap:0.8rem; }
@@ -123,7 +100,7 @@
     .road-fill.done { max-width:100%; }
     .road-pct { font-family:'DM Mono',monospace; font-size:10px; color:var(--aurora-green); width:34px; text-align:right; flex-shrink:0; }
 
-    .rv-icon { position:absolute; transition:left 0.7s cubic-bezier(0.4,0,0.2,1); display:flex; flex-direction:column; align-items:center; transform:translateX(-50%); z-index:2; }
+    .rv-icon { position:absolute; transition:left 0.7s cubic-bezier(0.4,0,0.2,1); display:flex; flex-direction:column; align-items:center; z-index:2; }
     .rv-body { width:36px; height:20px; background:var(--paper3); border:1px solid var(--line-strong); border-radius:3px 5px 2px 2px; position:relative; display:flex; align-items:center; justify-content:center; }
     .rv-body.paid { background:var(--aurora-green); border-color:var(--aurora-green); }
     .rv-cab { position:absolute; right:-8px; top:0; width:10px; height:14px; background:inherit; border-radius:0 4px 2px 0; border-right:1px solid var(--line-strong); border-top:1px solid var(--line-strong); }
@@ -137,9 +114,10 @@
     .rv-initial { position:absolute; font-family:'DM Mono',monospace; font-size:9px; font-weight:500; color:var(--text-primary); z-index:1; }
     .rv-body.paid .rv-initial { color:var(--ink); }
 
-    .filmstrip-wrap { background:var(--paper2); border:1px solid var(--line-strong); border-radius:2px; padding:1.5rem 2rem; margin-bottom:2rem; }
+    /* ── Tours ── */
+    .filmstrip-wrap { background:var(--paper2); border:1px solid var(--line-strong); padding:1.5rem 2rem; margin-bottom:2rem; }
     .film-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--aurora-teal); margin-bottom:1rem; }
-    .film-track { height:6px; background:var(--line-strong); position:relative; margin-bottom:1.5rem; }
+    .film-track { height:6px; background:var(--line-strong); margin-bottom:1.5rem; }
     .film-fill { height:100%; background:linear-gradient(to right,var(--aurora-violet),var(--aurora-teal),var(--aurora-green)); transition:width 0.8s cubic-bezier(0.4,0,0.2,1); }
     .avatars-row { display:flex; gap:1rem; flex-wrap:wrap; }
     .avatar-pill { display:flex; align-items:center; gap:0.6rem; padding:0.4rem 0.8rem 0.4rem 0.4rem; border:1px solid var(--line-strong); border-radius:100px; transition:all 0.3s; }
@@ -148,41 +126,90 @@
     .avatar-pill.done .avatar-circle { background:var(--aurora-green); color:var(--ink); }
     .avatar-name { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); }
     .avatar-pill.done .avatar-name { color:var(--aurora-green); }
-
     .tours-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(0,1fr)); gap:1px; background:var(--line-strong); border:1px solid var(--line-strong); margin-bottom:2rem; }
     .tour-cell { background:var(--paper2); padding:1.5rem 1rem; text-align:center; }
     .tour-icon { font-size:1.4rem; margin-bottom:0.75rem; display:block; }
     .tour-name { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-secondary); display:block; }
 
-    .friend-row { border-top:1px solid var(--line); padding:1.25rem 0; }
-    .friend-row:last-child { border-bottom:1px solid var(--line); }
-    .friend-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem; gap:1rem; flex-wrap:wrap; }
-    .friend-name { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; font-style:italic; color:var(--text-primary); }
+    /* ── Person card ── */
+    .person-card { border:1px solid var(--line-strong); margin-bottom:1.5rem; background:var(--paper2); }
 
-    .amount-block { display:flex; align-items:stretch; background:var(--paper2); border:1px solid var(--line-strong); border-radius:4px; overflow:hidden; transition:border-color 0.2s; width:100%; margin-bottom:0.9rem; }
-    .amount-block:focus-within { border-color:var(--aurora-green); }
-    .amount-symbol { font-family:'DM Mono',monospace; font-size:1.1rem; font-weight:500; color:var(--aurora-teal); padding:0.7rem 0.75rem 0.7rem 1rem; background:rgba(29,232,200,0.06); border-right:1px solid var(--line-strong); display:flex; align-items:center; user-select:none; }
-    .amount-input { font-family:'DM Mono',monospace; font-size:1.5rem; font-weight:500; color:var(--aurora-green); background:transparent; border:none; outline:none; padding:0.7rem 1rem; flex:1; min-width:0; width:100%; }
-    .amount-input::placeholder { color:var(--faint); }
-    .amount-max { font-family:'DM Mono',monospace; font-size:10px; color:var(--muted); padding:0.7rem 1rem; display:flex; align-items:center; white-space:nowrap; border-left:1px solid var(--line); }
+    .person-header {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:1.25rem 1.5rem; flex-wrap:wrap; gap:0.75rem;
+      border-bottom:1px solid var(--line);
+      cursor:pointer; user-select:none;
+    }
+    .person-header:hover { background:rgba(61,255,160,0.03); }
 
-    .quick-btns { display:flex; gap:0.5rem; margin-bottom:0.9rem; flex-wrap:wrap; }
-    .quick-btn { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--aurora-teal); background:transparent; border:1px solid var(--line-strong); border-radius:100px; padding:0.3rem 0.8rem; cursor:pointer; transition:all 0.15s; }
+    .person-left { display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
+    .person-name { font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; font-style:italic; color:var(--text-primary); }
+
+    .badge-paid { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:var(--aurora-green); border:1px solid var(--aurora-green); padding:2px 8px; border-radius:100px; }
+    .badge-partial { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:var(--aurora-teal); border:1px solid var(--aurora-teal); padding:2px 8px; border-radius:100px; }
+
+    .person-right { display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; }
+    .balance-block { text-align:right; }
+    .balance-paid { font-family:'DM Mono',monospace; font-size:11px; color:var(--aurora-green); }
+    .balance-owed { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--text-primary); }
+    .balance-owed.cleared { color:var(--aurora-green); }
+    .balance-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); }
+
+    .chevron { font-family:'DM Mono',monospace; font-size:12px; color:var(--muted); transition:transform 0.2s; }
+    .chevron.open { transform:rotate(180deg); }
+
+    /* mini progress bar inside card header */
+    .mini-bar-wrap { height:2px; background:var(--line-strong); }
+    .mini-bar-fill { height:100%; background:linear-gradient(to right,var(--aurora-violet),var(--aurora-teal),var(--aurora-green)); transition:width 0.5s ease; }
+
+    /* ── Entries body ── */
+    .person-body { display:none; padding:1.25rem 1.5rem; }
+    .person-body.open { display:block; }
+
+    /* entry log table */
+    .entry-log { width:100%; border-collapse:collapse; margin-bottom:1.25rem; }
+    .entry-log th { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); padding:0 0 0.6rem; text-align:left; border-bottom:1px solid var(--line-strong); }
+    .entry-log th:last-child { text-align:right; }
+    .entry-log td { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-secondary); padding:0.55rem 0; border-bottom:1px solid var(--line); vertical-align:top; }
+    .entry-log td:last-child { text-align:right; }
+    .entry-log .entry-amount { color:var(--aurora-green); font-weight:500; }
+    .entry-log .entry-note { font-family:'Crimson Pro',Georgia,serif; font-style:italic; font-size:12px; color:var(--muted); display:block; margin-top:2px; }
+    .entry-log .entry-date { color:var(--text-secondary); white-space:nowrap; }
+    .entry-log .del-btn { background:none; border:none; color:var(--faint); cursor:pointer; font-size:14px; padding:0 4px; line-height:1; transition:color 0.15s; }
+    .entry-log .del-btn:hover { color:var(--danger); }
+    .no-entries { font-family:'DM Mono',monospace; font-size:10px; color:var(--faint); padding:0.75rem 0 1rem; letter-spacing:0.08em; }
+
+    /* ── Add entry form ── */
+    .add-entry-form { background:var(--paper3); border:1px solid var(--line-strong); padding:1rem 1.25rem; }
+    .add-entry-title { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--aurora-teal); margin-bottom:0.85rem; }
+    .add-entry-row { display:flex; gap:0.75rem; flex-wrap:wrap; align-items:flex-end; }
+
+    .field-group { display:flex; flex-direction:column; gap:0.3rem; }
+    .field-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
+
+    .amt-wrap { display:flex; align-items:stretch; background:var(--paper2); border:1px solid var(--line-strong); border-radius:3px; overflow:hidden; transition:border-color 0.2s; }
+    .amt-wrap:focus-within { border-color:var(--aurora-green); }
+    .amt-sym { font-family:'DM Mono',monospace; font-size:13px; color:var(--aurora-teal); padding:0.5rem 0.6rem; background:rgba(29,232,200,0.06); border-right:1px solid var(--line-strong); display:flex; align-items:center; }
+    .amt-input { font-family:'DM Mono',monospace; font-size:1.1rem; font-weight:500; color:var(--aurora-green); background:transparent; border:none; outline:none; padding:0.5rem 0.75rem; width:110px; }
+    .amt-input::placeholder { color:var(--faint); }
+
+    .date-input { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-primary); background:var(--paper2); border:1px solid var(--line-strong); border-radius:3px; padding:0.55rem 0.75rem; outline:none; transition:border-color 0.2s; }
+    .date-input:focus { border-color:var(--aurora-green); }
+
+    .note-input { font-family:'Crimson Pro',Georgia,serif; font-style:italic; font-size:13px; color:var(--text-primary); background:var(--paper2); border:1px solid var(--line-strong); border-radius:3px; padding:0.55rem 0.75rem; outline:none; flex:1; min-width:120px; transition:border-color 0.2s; }
+    .note-input::placeholder { color:var(--faint); }
+    .note-input:focus { border-color:var(--aurora-teal); }
+
+    .add-btn { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink); background:var(--aurora-green); border:none; border-radius:3px; padding:0.55rem 1.2rem; cursor:pointer; font-weight:500; transition:all 0.15s; white-space:nowrap; align-self:flex-end; }
+    .add-btn:hover { background:var(--aurora-teal); }
+
+    /* quick fill inside add form */
+    .quick-btns { display:flex; gap:0.4rem; flex-wrap:wrap; margin-top:0.6rem; }
+    .quick-btn { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.08em; text-transform:uppercase; color:var(--aurora-teal); background:transparent; border:1px solid var(--line-strong); border-radius:100px; padding:0.25rem 0.65rem; cursor:pointer; transition:all 0.15s; }
     .quick-btn:hover { background:var(--accent-soft); border-color:var(--aurora-teal); color:var(--aurora-green); }
     .quick-btn.full { border-color:var(--aurora-green); color:var(--aurora-green); }
-    .quick-btn.full:hover { background:rgba(61,255,160,0.15); }
 
-    .mini-bar-wrap { height:3px; background:var(--line-strong); border-radius:0; margin-bottom:0.9rem; }
-    .mini-bar-fill { height:100%; background:linear-gradient(to right,var(--aurora-violet),var(--aurora-teal),var(--aurora-green)); transition:width 0.5s ease; border-radius:0; }
-
-    .notes-toggle { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); cursor:pointer; display:inline-flex; align-items:center; gap:0.4rem; background:none; border:none; padding:0; }
-    .notes-toggle:hover { color:var(--aurora-teal); }
-    .notes-area { display:none; margin-top:0.75rem; }
-    .notes-area.open { display:block; }
-    .notes-input { width:100%; font-family:'Crimson Pro',Georgia,serif; font-style:italic; font-size:14px; color:var(--text-primary); background:var(--paper2); border:1px solid var(--line); border-left:2px solid var(--aurora-teal); padding:0.75rem 1rem; resize:vertical; min-height:60px; outline:none; line-height:1.6; }
-    .notes-input:focus { border-left-color:var(--aurora-green); }
-    .notes-input::placeholder { color:var(--faint); }
-
+    /* ── Totals bar ── */
     .totals-bar { background:var(--paper2); border:1px solid var(--line-strong); padding:1.5rem 2rem; margin-top:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
     .total-item { text-align:right; }
     .total-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:0.25rem; }
@@ -190,6 +217,9 @@
     .autosave-tag { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); display:flex; align-items:center; gap:0.4rem; }
     .autosave-dot { width:4px; height:4px; border-radius:50%; background:var(--aurora-green); animation:pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.3} }
+
+    /* date input calendar icon color fix */
+    input[type="date"]::-webkit-calendar-picker-indicator { filter:invert(0.6) sepia(1) saturate(2) hue-rotate(120deg); cursor:pointer; }
   </style>
 </head>
 <body>
@@ -198,7 +228,7 @@
     <div class="aurora-bands"></div>
     <div class="eyebrow">Expedition Dossier — 2026</div>
     <div class="title-block">
-      <h1>Ring Road<em>Iceland</em></h1>
+      <h1>Ring Road<em>Iceland <span class="v-badge">v2.0</span></em></h1>
       <div class="countdown-block">
         <div class="countdown-num" id="days-val">---</div>
         <div class="countdown-label">Days remaining</div>
@@ -210,14 +240,15 @@
         </div>
       </div>
     </div>
-    <div class="sync-line"><span class="sync-dot"></span><span>Local storage</span></div>
+    <div class="sync-line"><span class="sync-dot"></span><span>Local storage · v2.0</span></div>
   </div>
 
   <div class="page">
     <nav class="nav">
       <button class="nav-btn active" onclick="switchTab('rv')" id="tab-rv">RV Rental</button>
       <button class="nav-btn" onclick="switchTab('tours')" id="tab-tours">Excursions</button>
-      <button class="nav-btn nav-right" onclick="toggleDossier()">Dossier</button>
+      <button class="nav-btn" onclick="toggleDossier()">Dossier</button>
+      <button class="nav-export nav-right" onclick="exportCSV()">↓ Export CSV</button>
     </nav>
 
     <div id="dossier-panel" class="dossier">
@@ -225,7 +256,7 @@
       <div class="dossier-grid">
         <div class="dossier-item">
           <strong>RV Rental · Phase 2</strong>
-          <p>Total balance $2,210.94 · $552.74 per head · Card: Isabel</p>
+          <p>Total $2,210.94 · $552.74 per head · Card: Isabel</p>
         </div>
         <div class="dossier-item">
           <strong>Adventure Excursions</strong>
@@ -234,7 +265,8 @@
       </div>
     </div>
 
-    <div id="section-rv" class="section active" style="padding-top:2rem;">
+    <!-- RV SECTION -->
+    <div id="section-rv" class="section active">
       <div class="progress-header">
         <div>
           <div class="section-title">Ring Road Progress</div>
@@ -242,11 +274,14 @@
         </div>
         <div class="pct-display" id="rv-pct">0%</div>
       </div>
+
       <div class="road-section">
         <div class="road-label">— Who's on the road</div>
         <div class="road-rows" id="road-rows"></div>
       </div>
-      <div id="rv-ledger"></div>
+
+      <div id="rv-cards"></div>
+
       <div class="totals-bar">
         <div class="autosave-tag"><span class="autosave-dot"></span> Auto-saving</div>
         <div class="total-item">
@@ -260,7 +295,8 @@
       </div>
     </div>
 
-    <div id="section-tours" class="section" style="padding-top:2rem;">
+    <!-- TOURS SECTION -->
+    <div id="section-tours" class="section">
       <div class="progress-header">
         <div>
           <div class="section-title">Excursion Readiness</div>
@@ -268,18 +304,22 @@
         </div>
         <div class="pct-display" id="tours-pct">0%</div>
       </div>
+
       <div class="tours-grid">
         <div class="tour-cell"><span class="tour-icon">♨</span><span class="tour-name">Blue Lagoon</span></div>
         <div class="tour-cell"><span class="tour-icon">❄</span><span class="tour-name">Katla Ice</span></div>
         <div class="tour-cell"><span class="tour-icon">◎</span><span class="tour-name">Whale Watch</span></div>
         <div class="tour-cell"><span class="tour-icon">≈</span><span class="tour-name">Silfra Snorkel</span></div>
       </div>
+
       <div class="filmstrip-wrap">
         <div class="film-label">— Settlement Progress</div>
         <div class="film-track"><div class="film-fill" id="tours-bar" style="width:0%"></div></div>
         <div class="avatars-row" id="tours-avatars"></div>
       </div>
-      <div id="tours-ledger"></div>
+
+      <div id="tours-cards"></div>
+
       <div class="totals-bar">
         <div class="autosave-tag"><span class="autosave-dot"></span> Auto-saving</div>
         <div class="total-item">
@@ -294,231 +334,295 @@
     </div>
   </div>
 
-  <script>
-    const FRIENDS = ['Nicolle', 'Isabel', 'Gabriel', 'Claudia'];
-    const RV_COST = 552.74;
-    const TOUR_COST = 575.33;
-    const STORAGE_KEY = 'iceland_aurora_v2';
+<script>
+  const FRIENDS = ['Nicolle', 'Isabel', 'Gabriel', 'Claudia'];
+  const RV_COST  = 552.74;
+  const TOUR_COST = 575.33;
+  const STORAGE_KEY = 'iceland_v2';
 
-    let activeTab = 'rv';
-    let data = {
-      rv: {
-        payments: { Nicolle: 0, Isabel: 552.74, Gabriel: 0, Claudia: 0 },
-        notes: { Nicolle: '', Isabel: '', Gabriel: '', Claudia: '' }
-      },
-      tours: {
-        payments: { Nicolle: 0, Isabel: 575.33, Gabriel: 0, Claudia: 0 },
-        notes: { Nicolle: '', Isabel: '', Gabriel: '', Claudia: '' }
-      }
-    };
+  let activeTab = 'rv';
 
-    function save() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {} }
-    function load() {
-      try {
-        const s = localStorage.getItem(STORAGE_KEY);
-        if (s) { const p = JSON.parse(s); if (p.rv && p.tours) data = p; }
-      } catch(e) {}
-    }
+  // data shape: { rv: { Nicolle: [{id,date,amount,note},...], ... }, tours: { ... } }
+  function makeEntries(amount) {
+    const today = new Date().toISOString().slice(0,10);
+    return amount > 0 ? [{ id: uid(), date: today, amount, note: '' }] : [];
+  }
+  function uid() { return Math.random().toString(36).slice(2,9); }
 
-    function switchTab(tab) {
-      activeTab = tab;
-      document.getElementById('section-rv').classList.toggle('active', tab === 'rv');
-      document.getElementById('section-tours').classList.toggle('active', tab === 'tours');
-      document.getElementById('tab-rv').classList.toggle('active', tab === 'rv');
-      document.getElementById('tab-tours').classList.toggle('active', tab === 'tours');
-      render(true);
-    }
+  let data = {
+    rv:    { Nicolle: [], Isabel: makeEntries(552.74), Gabriel: [], Claudia: [] },
+    tours: { Nicolle: [], Isabel: makeEntries(575.33), Gabriel: [], Claudia: [] }
+  };
 
-    function toggleDossier() { document.getElementById('dossier-panel').classList.toggle('open'); }
-    function toggleNotes(name, tab) { document.getElementById('notes-' + tab + '-' + name).classList.toggle('open'); }
+  function save() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {} }
+  function load() {
+    try {
+      const s = localStorage.getItem(STORAGE_KEY);
+      if (s) { const p = JSON.parse(s); if (p.rv && p.tours) data = p; }
+    } catch(e) {}
+  }
 
-    let saveTimer;
-    function handlePayment(name, rawVal, tab) {
-      const max = tab === 'rv' ? RV_COST : TOUR_COST;
-      let val = parseFloat(rawVal);
-      if (isNaN(val) || val < 0) val = 0;
-      if (val > max) val = max;
-      data[tab].payments[name] = val;
-      // update mini-bar and badge without touching the input
-      const barEl = document.getElementById('minibar-' + tab + '-' + name);
-      if (barEl) barEl.style.width = Math.min(100, (val / max) * 100).toFixed(1) + '%';
-      const badge = document.getElementById('badge-' + tab + '-' + name);
-      if (badge) badge.style.display = val >= max ? 'inline-block' : 'none';
-      updateTotals(tab);
-      renderRoadRows();
-      clearTimeout(saveTimer);
-      saveTimer = setTimeout(save, 600);
-    }
+  // ── helpers ──
+  function totalPaid(tab, name) {
+    return (data[tab][name] || []).reduce((s,e) => s + e.amount, 0);
+  }
+  function costFor(tab) { return tab === 'rv' ? RV_COST : TOUR_COST; }
+  function balance(tab, name) { return Math.max(0, costFor(tab) - totalPaid(tab, name)); }
 
-    function setQuick(name, val, tab) {
-      const max = tab === 'rv' ? RV_COST : TOUR_COST;
-      data[tab].payments[name] = val;
-      // update input value, bar, and badge without rebuilding DOM
-      const inputEl = document.getElementById('amtinput-' + tab + '-' + name);
-      if (inputEl) inputEl.value = val.toFixed(2);
-      const barEl = document.getElementById('minibar-' + tab + '-' + name);
-      if (barEl) barEl.style.width = Math.min(100, (val / max) * 100).toFixed(1) + '%';
-      const badge = document.getElementById('badge-' + tab + '-' + name);
-      if (badge) badge.style.display = val >= max ? 'inline-block' : 'none';
-      updateTotals(tab);
-      renderRoadRows();
-      clearTimeout(saveTimer);
-      saveTimer = setTimeout(save, 600);
-    }
+  // ── tab switch ──
+  function switchTab(tab) {
+    activeTab = tab;
+    ['rv','tours'].forEach(t => {
+      document.getElementById('section-'+t).classList.toggle('active', t===tab);
+      document.getElementById('tab-'+t).classList.toggle('active', t===tab);
+    });
+    renderAll();
+  }
+  function toggleDossier() { document.getElementById('dossier-panel').classList.toggle('open'); }
 
-    function handleNote(name, val, tab) {
-      data[tab].notes[name] = val;
-      clearTimeout(saveTimer);
-      saveTimer = setTimeout(save, 600);
-    }
+  // ── add entry ──
+  function addEntry(tab, name) {
+    const amtEl  = document.getElementById('newinput-'+tab+'-'+name);
+    const dateEl = document.getElementById('newdate-'+tab+'-'+name);
+    const noteEl = document.getElementById('newnote-'+tab+'-'+name);
+    const amt = parseFloat(amtEl.value);
+    if (isNaN(amt) || amt <= 0) { amtEl.focus(); return; }
+    const maxAmt = Math.min(amt, balance(tab, name));
+    data[tab][name].push({ id: uid(), date: dateEl.value, amount: maxAmt, note: noteEl.value.trim() });
+    amtEl.value = '';
+    noteEl.value = '';
+    save();
+    renderAll();
+    // reopen the card body after re-render
+    const body = document.getElementById('body-'+tab+'-'+name);
+    if (body) { body.classList.add('open'); document.getElementById('chev-'+tab+'-'+name).classList.add('open'); }
+  }
 
-    function updateTotals(tab) {
-      const costPer = tab === 'rv' ? RV_COST : TOUR_COST;
-      const totalAll = costPer * 4;
-      const paid = Object.values(data[tab].payments).reduce((a,b) => a+b, 0);
-      const pct = Math.min(100, (paid / totalAll) * 100);
-      if (tab === 'rv') {
-        document.getElementById('rv-pct').textContent = Math.round(pct) + '%';
-        document.getElementById('rv-total-paid').textContent = '$' + paid.toFixed(2);
-        document.getElementById('rv-remaining').textContent = '$' + Math.max(0, totalAll - paid).toFixed(2);
+  function deleteEntry(tab, name, id) {
+    data[tab][name] = data[tab][name].filter(e => e.id !== id);
+    save();
+    renderAll();
+    const body = document.getElementById('body-'+tab+'-'+name);
+    if (body) { body.classList.add('open'); document.getElementById('chev-'+tab+'-'+name).classList.add('open'); }
+  }
+
+  function setQuickAmt(tab, name, amt) {
+    const el = document.getElementById('newinput-'+tab+'-'+name);
+    if (el) { el.value = amt.toFixed(2); el.focus(); }
+  }
+
+  function toggleCard(tab, name) {
+    const body = document.getElementById('body-'+tab+'-'+name);
+    const chev = document.getElementById('chev-'+tab+'-'+name);
+    if (body) { body.classList.toggle('open'); chev.classList.toggle('open'); }
+  }
+
+  // ── road rows ──
+  function renderRoadRows() {
+    const container = document.getElementById('road-rows');
+    if (!container) return;
+    container.innerHTML = '';
+    FRIENDS.forEach(name => {
+      const paid = totalPaid('rv', name);
+      const pct  = Math.min(100, (paid / RV_COST) * 100);
+      const isDone = paid >= RV_COST;
+
+      const row = document.createElement('div'); row.className = 'road-row';
+      const nameEl = document.createElement('div'); nameEl.className = 'road-name'; nameEl.textContent = name;
+      const trackWrap = document.createElement('div'); trackWrap.className = 'road-track-wrap';
+      const track = document.createElement('div'); track.className = 'road-track';
+      const fill  = document.createElement('div'); fill.className  = 'road-fill'+(isDone?' done':'');
+      const rv    = document.createElement('div'); rv.className    = 'rv-icon';
+      rv.innerHTML = `<div class="rv-body ${isDone?'paid':''}"><div class="rv-stripe"></div><div class="rv-cab"></div><div class="rv-window"></div><span class="rv-initial">${name[0]}</span></div><div class="rv-wheels"><div class="rv-wheel"></div><div class="rv-wheel"></div></div>`;
+      const pctLabel = document.createElement('div'); pctLabel.className = 'road-pct'; pctLabel.textContent = Math.round(pct)+'%';
+      trackWrap.appendChild(track); trackWrap.appendChild(fill); trackWrap.appendChild(rv);
+      row.appendChild(nameEl); row.appendChild(trackWrap); row.appendChild(pctLabel);
+      container.appendChild(row);
+      requestAnimationFrame(() => {
+        const tw = trackWrap.offsetWidth;
+        const minLeft = 22, maxLeft = isDone ? tw-2 : tw-40;
+        const leftPx = minLeft + (pct/100)*(maxLeft-minLeft);
+        fill.style.width = Math.max(0, leftPx-minLeft+4)+'px';
+        rv.style.left = leftPx+'px'; rv.style.top='50%'; rv.style.transform='translateX(-50%) translateY(-62%)';
+      });
+    });
+  }
+
+  // ── person cards ──
+  function renderCards(tab) {
+    const container = document.getElementById(tab+'-cards');
+    if (!container) return;
+
+    // track which cards are open before wiping
+    const openCards = {};
+    FRIENDS.forEach(name => {
+      const body = document.getElementById('body-'+tab+'-'+name);
+      if (body) openCards[name] = body.classList.contains('open');
+    });
+
+    container.innerHTML = '';
+    const cost = costFor(tab);
+
+    FRIENDS.forEach(name => {
+      const entries = data[tab][name] || [];
+      const paid    = entries.reduce((s,e) => s+e.amount, 0);
+      const bal     = Math.max(0, cost - paid);
+      const pct     = Math.min(100, (paid/cost)*100);
+      const isDone  = paid >= cost;
+      const wasOpen = openCards[name] !== undefined ? openCards[name] : false;
+      const half    = (cost/2).toFixed(2);
+      const quarter = (cost/4).toFixed(2);
+      const today   = new Date().toISOString().slice(0,10);
+
+      const card = document.createElement('div');
+      card.className = 'person-card';
+
+      // entry rows html — use string concat to avoid nested backtick issues
+      let entryRows;
+      if (entries.length === 0) {
+        entryRows = '<div class="no-entries">No payments logged yet.</div>';
       } else {
-        document.getElementById('tours-pct').textContent = Math.round(pct) + '%';
-        document.getElementById('tours-bar').style.width = pct + '%';
-        document.getElementById('tours-total-paid').textContent = '$' + paid.toFixed(2);
-        document.getElementById('tours-remaining').textContent = '$' + Math.max(0, totalAll - paid).toFixed(2);
-        document.getElementById('tours-avatars').innerHTML = FRIENDS.map(name => {
-          const done = data.tours.payments[name] >= TOUR_COST;
-          return `<div class="avatar-pill ${done?'done':''}">
-            <div class="avatar-circle">${name[0]}</div>
-            <span class="avatar-name">${name}</span>
-          </div>`;
-        }).join('');
+        const rowsHtml = entries.map(e =>
+          '<tr>' +
+          '<td class="entry-date">' + e.date + '</td>' +
+          '<td><span class="entry-note">' + (e.note || '—') + '</span></td>' +
+          '<td class="entry-amount">$' + e.amount.toFixed(2) + '</td>' +
+          '<td><button class="del-btn" onclick="deleteEntry(\'' + tab + '\',\'' + name + '\',\'' + e.id + '\')" title="Remove">\xd7</button></td>' +
+          '</tr>'
+        ).join('');
+        entryRows = '<table class="entry-log"><thead><tr><th>Date</th><th>Note</th><th>Amount</th><th></th></tr></thead><tbody>' + rowsHtml + '</tbody></table>';
       }
-    }
 
-    function renderRoadRows() {
-      const container = document.getElementById('road-rows');
-      if (!container) return;
-      container.innerHTML = '';
-      FRIENDS.forEach(name => {
-        const val = data.rv.payments[name];
-        const pct = Math.min(100, (val / RV_COST) * 100);
-        const isDone = val >= RV_COST;
-        const row = document.createElement('div');
-        row.className = 'road-row';
-        const nameEl = document.createElement('div');
-        nameEl.className = 'road-name';
-        nameEl.textContent = name;
-        const trackWrap = document.createElement('div');
-        trackWrap.className = 'road-track-wrap';
-        const track = document.createElement('div');
-        track.className = 'road-track';
-        const fill = document.createElement('div');
-        fill.className = 'road-fill' + (isDone ? ' done' : '');
-        const rv = document.createElement('div');
-        rv.className = 'rv-icon';
-        rv.innerHTML = `
-          <div class="rv-body ${isDone?'paid':''}">
-            <div class="rv-stripe"></div><div class="rv-cab"></div><div class="rv-window"></div>
-            <span class="rv-initial">${name[0]}</span>
+      const badgeHTML = isDone
+        ? '<span class="badge-paid">Paid off</span>'
+        : paid > 0 ? '<span class="badge-partial">' + Math.round(pct) + '% paid</span>' : '';
+
+      card.innerHTML = `
+        <div class="person-header" onclick="toggleCard('${tab}','${name}')">
+          <div class="person-left">
+            <div class="person-name">${name}</div>
+            ${badgeHTML}
           </div>
-          <div class="rv-wheels"><div class="rv-wheel"></div><div class="rv-wheel"></div></div>`;
-        const pctLabel = document.createElement('div');
-        pctLabel.className = 'road-pct';
-        pctLabel.textContent = Math.round(pct) + '%';
-        trackWrap.appendChild(track);
-        trackWrap.appendChild(fill);
-        trackWrap.appendChild(rv);
-        row.appendChild(nameEl);
-        row.appendChild(trackWrap);
-        row.appendChild(pctLabel);
-        container.appendChild(row);
-        requestAnimationFrame(() => {
-          const tw = trackWrap.offsetWidth;
-          const minLeft = 22, maxLeft = isDone ? tw - 2 : tw - 40;
-          const leftPx = minLeft + (pct / 100) * (maxLeft - minLeft);
-          fill.style.width = Math.max(0, leftPx - minLeft + 4) + 'px';
-          rv.style.left = leftPx + 'px';
-          rv.style.top = '50%';
-          rv.style.transform = 'translateX(-50%) translateY(-62%)';
+          <div class="person-right">
+            <div class="balance-block">
+              <div class="balance-paid">Paid: $${paid.toFixed(2)}</div>
+              <div class="balance-owed ${isDone ? 'cleared' : ''}">${isDone ? 'Cleared ✓' : '$' + bal.toFixed(2) + ' remaining'}</div>
+              <div class="balance-label">of $${cost.toFixed(2)}</div>
+            </div>
+            <div class="chevron ${wasOpen?'open':''}" id="chev-${tab}-${name}">▾</div>
+          </div>
+        </div>
+        <div class="mini-bar-wrap"><div class="mini-bar-fill" style="width:${pct.toFixed(1)}%"></div></div>
+        <div class="person-body ${wasOpen?'open':''}" id="body-${tab}-${name}">
+          ${entryRows}
+          <div class="add-entry-form">
+            <div class="add-entry-title">— Log a payment</div>
+            <div class="add-entry-row">
+              <div class="field-group">
+                <div class="field-label">Amount</div>
+                <div class="amt-wrap">
+                  <div class="amt-sym">$</div>
+                  <input id="newinput-${tab}-${name}" class="amt-input" type="number" min="0.01" step="0.01" placeholder="0.00">
+                </div>
+              </div>
+              <div class="field-group">
+                <div class="field-label">Date</div>
+                <input id="newdate-${tab}-${name}" class="date-input" type="date" value="${today}">
+              </div>
+              <div class="field-group" style="flex:1;min-width:120px;">
+                <div class="field-label">Note (optional)</div>
+                <input id="newnote-${tab}-${name}" class="note-input" type="text" placeholder="e.g. Venmo transfer…">
+              </div>
+              <button class="add-btn" onclick="addEntry('${tab}','${name}')">+ Log</button>
+            </div>
+            <div class="quick-btns">
+              <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-right:4px;">Quick:</span>
+              <button class="quick-btn" onclick="setQuickAmt('${tab}','${name}',${parseFloat(quarter)})">¼ · $${quarter}</button>
+              <button class="quick-btn" onclick="setQuickAmt('${tab}','${name}',${parseFloat(half)})">½ · $${half}</button>
+              <button class="quick-btn full" onclick="setQuickAmt('${tab}','${name}',${bal > 0 ? bal : cost})">Balance · $${bal > 0 ? bal.toFixed(2) : cost.toFixed(2)}</button>
+            </div>
+          </div>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  // ── totals ──
+  function updateTotals(tab) {
+    const cost = costFor(tab);
+    const totalAll = cost * 4;
+    const paid = FRIENDS.reduce((s,n) => s + totalPaid(tab,n), 0);
+    const pct  = Math.min(100, (paid/totalAll)*100);
+    if (tab === 'rv') {
+      document.getElementById('rv-pct').textContent = Math.round(pct)+'%';
+      document.getElementById('rv-total-paid').textContent = '$'+paid.toFixed(2);
+      document.getElementById('rv-remaining').textContent  = '$'+Math.max(0,totalAll-paid).toFixed(2);
+    } else {
+      document.getElementById('tours-pct').textContent = Math.round(pct)+'%';
+      document.getElementById('tours-bar').style.width = pct+'%';
+      document.getElementById('tours-total-paid').textContent = '$'+paid.toFixed(2);
+      document.getElementById('tours-remaining').textContent  = '$'+Math.max(0,totalAll-paid).toFixed(2);
+      document.getElementById('tours-avatars').innerHTML = FRIENDS.map(name => {
+        const done = totalPaid('tours',name) >= TOUR_COST;
+        return `<div class="avatar-pill ${done?'done':''}"><div class="avatar-circle">${name[0]}</div><span class="avatar-name">${name}</span></div>`;
+      }).join('');
+    }
+  }
+
+  // ── full render ──
+  function renderAll() {
+    updateTotals(activeTab);
+    if (activeTab === 'rv') { renderRoadRows(); renderCards('rv'); }
+    else renderCards('tours');
+  }
+
+  // ── CSV export ──
+  function exportCSV() {
+    const rows = [['Tab','Name','Date','Amount','Note','Running Total','Balance']];
+    ['rv','tours'].forEach(tab => {
+      const cost = costFor(tab);
+      FRIENDS.forEach(name => {
+        let running = 0;
+        (data[tab][name]||[]).forEach(e => {
+          running += e.amount;
+          rows.push([
+            tab.toUpperCase(), name, e.date,
+            e.amount.toFixed(2), e.note||'',
+            running.toFixed(2),
+            Math.max(0, cost-running).toFixed(2)
+          ]);
         });
-      });
-    }
-
-    function buildLedger(tab, containerId) {
-      const costPer = tab === 'rv' ? RV_COST : TOUR_COST;
-      const container = document.getElementById(containerId);
-      if (!container) return;
-      FRIENDS.forEach(name => {
-        const rowId = 'row-' + tab + '-' + name;
-        // If row already exists, don't touch it — focus is preserved
-        if (document.getElementById(rowId)) return;
-        const val = data[tab].payments[name];
-        const note = data[tab].notes[name];
-        const pct = Math.min(100, (val / costPer) * 100);
-        const isDone = val >= costPer;
-        const half = (costPer / 2).toFixed(2);
-        const quarter = (costPer / 4).toFixed(2);
-        const row = document.createElement('div');
-        row.className = 'friend-row';
-        row.id = rowId;
-        row.innerHTML = `
-          <div class="friend-header">
-            <div class="friend-name">${name}</div>
-            <span id="badge-${tab}-${name}" style="display:${isDone?'inline-block':'none'};font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--aurora-green);border:1px solid var(--aurora-green);padding:2px 8px;border-radius:100px;">Paid off</span>
-          </div>
-          <div class="amount-block">
-            <div class="amount-symbol">$</div>
-            <input id="amtinput-${tab}-${name}" class="amount-input" type="number" min="0" max="${costPer}" step="0.01" value="${val.toFixed(2)}" placeholder="0.00" oninput="handlePayment('${name}',this.value,'${tab}')">
-            <div class="amount-max">of $${costPer.toFixed(2)}</div>
-          </div>
-          <div class="mini-bar-wrap">
-            <div class="mini-bar-fill" id="minibar-${tab}-${name}" style="width:${pct.toFixed(1)}%"></div>
-          </div>
-          <div class="quick-btns">
-            <button class="quick-btn" onclick="setQuick('${name}',${parseFloat(quarter)},'${tab}')">¼ · $${quarter}</button>
-            <button class="quick-btn" onclick="setQuick('${name}',${parseFloat(half)},'${tab}')">½ · $${half}</button>
-            <button class="quick-btn full" onclick="setQuick('${name}',${costPer},'${tab}')">Full · $${costPer.toFixed(2)}</button>
-            <button class="quick-btn" onclick="setQuick('${name}',0,'${tab}')" style="color:var(--muted);">Clear</button>
-          </div>
-          <button class="notes-toggle" onclick="toggleNotes('${name}','${tab}')">+ Note</button>
-          <div class="notes-area ${note?'open':''}" id="notes-${tab}-${name}">
-            <textarea class="notes-input" placeholder="Add a note about ${name}'s payment…" oninput="handleNote('${name}',this.value,'${tab}')">${note}</textarea>
-          </div>
-        `;
-        container.appendChild(row);
-      });
-    }
-
-    function render(clearLedger) {
-      updateTotals(activeTab);
-      if (activeTab === 'rv') {
-        if (clearLedger) document.getElementById('rv-ledger').innerHTML = '';
-        renderRoadRows();
-        buildLedger('rv', 'rv-ledger');
-      } else {
-        if (clearLedger) document.getElementById('tours-ledger').innerHTML = '';
-        buildLedger('tours', 'tours-ledger');
-      }
-    }
-
-    function startCountdown() {
-      const target = new Date('2026-04-06T00:00:00');
-      function update() {
-        const diff = target - new Date();
-        if (diff > 0) {
-          document.getElementById('days-val').textContent = Math.floor(diff / (1000*60*60*24));
-          document.getElementById('hrs-val').textContent = Math.floor((diff / (1000*60*60)) % 24);
+        if ((data[tab][name]||[]).length === 0) {
+          rows.push([tab.toUpperCase(), name, '', '0.00', '', '0.00', cost.toFixed(2)]);
         }
-      }
-      update();
-      setInterval(update, 60000);
-    }
+      });
+    });
+    const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+    const blob = new Blob([csv], { type:'text/csv' });
+    const url  = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'iceland_expedition_payments.csv';
+    a.click(); URL.revokeObjectURL(url);
+  }
 
-    load();
-    startCountdown();
-    render(true);
-    window.addEventListener('resize', () => { if (activeTab === 'rv') renderRoadRows(); });
-  </script>
+  // ── countdown ──
+  function startCountdown() {
+    const target = new Date('2026-04-06T00:00:00');
+    function update() {
+      const diff = target - new Date();
+      if (diff > 0) {
+        document.getElementById('days-val').textContent = Math.floor(diff/(1000*60*60*24));
+        document.getElementById('hrs-val').textContent  = Math.floor((diff/(1000*60*60))%24);
+      }
+    }
+    update(); setInterval(update, 60000);
+  }
+
+  load();
+  startCountdown();
+  renderAll();
+  window.addEventListener('resize', () => { if (activeTab==='rv') renderRoadRows(); });
+</script>
 </body>
 </html>
