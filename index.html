@@ -30,41 +30,6 @@
 
     body { font-family: 'Crimson Pro', Georgia, serif; background: var(--ink); color: var(--text-primary); min-height: 100vh; overflow-x: hidden; }
 
-    /* ── Mobile responsive ── */
-    @media(max-width:600px) {
-      .masthead { padding: 2rem 1.25rem 1.5rem; }
-      .masthead::after { font-size: 5rem; }
-      .title-block { flex-direction: column; align-items: flex-start; gap: 1rem; }
-      .countdown-block { text-align: left; display: flex; gap: 1.5rem; align-items: flex-end; }
-      .countdown-num { font-size: 2rem; }
-      .nav { padding: 0 0.5rem; }
-      .nav-btn { padding: 0.85rem 0.75rem; font-size: 9px; letter-spacing: 0.1em; }
-      .nav-export { padding: 0.5rem 0.75rem; font-size: 9px; margin-left: 0.25rem; }
-      .section { padding: 1.25rem 1rem 2rem; }
-      .road-section { padding: 1.25rem 1rem 1rem; }
-      .filmstrip-wrap { padding: 1.25rem 1rem; }
-      .person-header { padding: 1rem; }
-      .person-body { padding: 1rem; }
-      .add-entry-form { padding: 0.85rem; }
-      .add-entry-row { flex-direction: column; gap: 0.6rem; }
-      .amt-wrap { width: 100%; }
-      .amt-input { width: 100%; flex: 1; }
-      .date-input { width: 100%; }
-      .note-input { width: 100%; min-width: unset; }
-      .field-group { width: 100%; }
-      .add-btn { width: 100%; text-align: center; padding: 0.65rem; }
-      .totals-bar { padding: 1.25rem 1rem; }
-      .pct-display { font-size: 3rem; }
-      .section-title { font-size: 1.4rem; }
-      .tour-cell { padding: 1rem 0.5rem; }
-      .quick-btn { font-size: 9px; padding: 0.25rem 0.5rem; }
-      .entry-log td, .entry-log th { font-size: 10px; padding: 0.4rem 0.2rem; }
-      .dossier { padding: 1.25rem 1rem; }
-      .road-name { width: 46px; font-size: 9px; }
-      .person-right { gap: 0.75rem; }
-      .balance-owed { font-size: 0.95rem; }
-    }
-
     /* ── Aurora masthead ── */
     .aurora-bands { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
     .aurora-bands::before {
@@ -255,6 +220,44 @@
 
     /* date input calendar icon color fix */
     input[type="date"]::-webkit-calendar-picker-indicator { filter:invert(0.6) sepia(1) saturate(2) hue-rotate(120deg); cursor:pointer; }
+
+    /* ── Mobile ── */
+    @media (max-width: 600px) {
+      .masthead { padding: 1.5rem 1rem 1.25rem; }
+      .masthead::after { font-size: 4.5rem; }
+      .title-block { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .countdown-block { text-align: left; }
+      .countdown-num { font-size: 2rem; }
+      .eyebrow { font-size: 9px; }
+      .nav { padding: 0 0.25rem; }
+      .nav-btn { padding: 0.85rem 0.65rem; font-size: 9px; letter-spacing: 0.08em; }
+      .nav-export { padding: 0.5rem 0.65rem; font-size: 9px; letter-spacing: 0.08em; margin-left: 0.25rem; }
+      .section { padding: 1rem 1rem 2rem; }
+      .dossier { padding: 1rem; }
+      .dossier-grid { grid-template-columns: 1fr; }
+      .road-section { padding: 1rem; }
+      .road-name { width: 46px; font-size: 9px; }
+      .filmstrip-wrap { padding: 1rem; }
+      .progress-header { gap: 0.25rem; }
+      .pct-display { font-size: 2.5rem; }
+      .section-title { font-size: 1.3rem; }
+      .person-header { padding: 0.85rem 1rem; }
+      .person-right { gap: 0.5rem; }
+      .balance-owed { font-size: 0.9rem; }
+      .person-body { padding: 0.85rem 1rem; }
+      .add-entry-form { padding: 0.85rem; }
+      .add-entry-row { flex-direction: column; align-items: stretch; gap: 0.6rem; }
+      .field-group { width: 100%; }
+      .amt-wrap { width: 100%; }
+      .amt-input { width: 100%; min-width: 0; }
+      .date-input { width: 100%; }
+      .note-input { width: 100%; min-width: 0; }
+      .add-btn { width: 100%; padding: 0.65rem; }
+      .totals-bar { padding: 1rem; flex-direction: column; align-items: flex-start; }
+      .total-item { text-align: left; }
+      .entry-log th, .entry-log td { font-size: 10px; padding: 0.35rem 0.2rem; }
+      .quick-btn { font-size: 9px; padding: 0.2rem 0.5rem; }
+    }
   </style>
 </head>
 <body>
