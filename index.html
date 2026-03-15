@@ -326,7 +326,7 @@
       document.getElementById('section-tours').classList.toggle('active', tab === 'tours');
       document.getElementById('tab-rv').classList.toggle('active', tab === 'rv');
       document.getElementById('tab-tours').classList.toggle('active', tab === 'tours');
-      render();
+      render(true);
     }
 
     function toggleDossier() { document.getElementById('dossier-panel').classList.toggle('open'); }
@@ -339,8 +339,11 @@
       if (isNaN(val) || val < 0) val = 0;
       if (val > max) val = max;
       data[tab].payments[name] = val;
+      // update mini-bar and badge without touching the input
       const barEl = document.getElementById('minibar-' + tab + '-' + name);
       if (barEl) barEl.style.width = Math.min(100, (val / max) * 100).toFixed(1) + '%';
+      const badge = document.getElementById('badge-' + tab + '-' + name);
+      if (badge) badge.style.display = val >= max ? 'inline-block' : 'none';
       updateTotals(tab);
       renderRoadRows();
       clearTimeout(saveTimer);
@@ -348,12 +351,15 @@
     }
 
     function setQuick(name, val, tab) {
+      const max = tab === 'rv' ? RV_COST : TOUR_COST;
       data[tab].payments[name] = val;
+      // update input value, bar, and badge without rebuilding DOM
       const inputEl = document.getElementById('amtinput-' + tab + '-' + name);
       if (inputEl) inputEl.value = val.toFixed(2);
       const barEl = document.getElementById('minibar-' + tab + '-' + name);
-      const max = tab === 'rv' ? RV_COST : TOUR_COST;
       if (barEl) barEl.style.width = Math.min(100, (val / max) * 100).toFixed(1) + '%';
+      const badge = document.getElementById('badge-' + tab + '-' + name);
+      if (badge) badge.style.display = val >= max ? 'inline-block' : 'none';
       updateTotals(tab);
       renderRoadRows();
       clearTimeout(saveTimer);
@@ -443,8 +449,10 @@
       const costPer = tab === 'rv' ? RV_COST : TOUR_COST;
       const container = document.getElementById(containerId);
       if (!container) return;
-      container.innerHTML = '';
       FRIENDS.forEach(name => {
+        const rowId = 'row-' + tab + '-' + name;
+        // If row already exists, don't touch it — focus is preserved
+        if (document.getElementById(rowId)) return;
         const val = data[tab].payments[name];
         const note = data[tab].notes[name];
         const pct = Math.min(100, (val / costPer) * 100);
@@ -453,10 +461,11 @@
         const quarter = (costPer / 4).toFixed(2);
         const row = document.createElement('div');
         row.className = 'friend-row';
+        row.id = rowId;
         row.innerHTML = `
           <div class="friend-header">
             <div class="friend-name">${name}</div>
-            ${isDone ? '<span style="font-family:\'DM Mono\',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--aurora-green);border:1px solid var(--aurora-green);padding:2px 8px;border-radius:100px;">Paid off</span>' : ''}
+            <span id="badge-${tab}-${name}" style="display:${isDone?'inline-block':'none'};font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--aurora-green);border:1px solid var(--aurora-green);padding:2px 8px;border-radius:100px;">Paid off</span>
           </div>
           <div class="amount-block">
             <div class="amount-symbol">$</div>
@@ -481,12 +490,14 @@
       });
     }
 
-    function render() {
+    function render(clearLedger) {
       updateTotals(activeTab);
       if (activeTab === 'rv') {
+        if (clearLedger) document.getElementById('rv-ledger').innerHTML = '';
         renderRoadRows();
         buildLedger('rv', 'rv-ledger');
       } else {
+        if (clearLedger) document.getElementById('tours-ledger').innerHTML = '';
         buildLedger('tours', 'tours-ledger');
       }
     }
@@ -506,7 +517,7 @@
 
     load();
     startCountdown();
-    render();
+    render(true);
     window.addEventListener('resize', () => { if (activeTab === 'rv') renderRoadRows(); });
   </script>
 </body>
